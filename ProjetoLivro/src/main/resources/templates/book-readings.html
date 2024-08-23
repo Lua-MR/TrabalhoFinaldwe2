@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Livros</title>
+    <link rel="stylesheet" href="/estilos.css">
+</head>
+<body>
+    <div class="container">
+        <h2 th:text="${book.title}">Livro</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Usuário</th>
+                    <th>Status</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="reading : ${readings}">
+                    <td th:text="${reading.user.name}">User</td>
+                    <td th:text="${reading.status}">Status</td>
+                    <td th:text="${#temporals.format(reading.readingTime, 'yyyy-MM-dd HH:mm')}">Date</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <button onclick="window.location.href='/readings'">Voltar</button>
+    </div>
+</body>
+</html>

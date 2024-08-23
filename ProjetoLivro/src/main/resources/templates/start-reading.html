@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Leitura</title>
+    <link rel="stylesheet" href="/estilos.css">
+</head>
+<body>
+    <h2>Atualizar Leitura</h2>
+    <form th:action="@{/start-reading}" th:object="${reading}" method="post">
+        <div>
+            <label for="book">Livro:</label>
+            <select id="book" th:field="*{book.id}" required>
+                <option th:each="book : ${books}" th:value="${book.id}" th:text="${book.title}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="user">Usuário:</label>
+            <select id="user" th:field="*{user.id}" required>
+                
+                <option th:value="${loggedInUser.id}" th:text="${loggedInUser.name}" selected></option>
+            </select>
+        </div>
+        <div>
+            <label for="status">Status:</label>
+            <select id="status" th:field="*{status}" required>
+                <option value="lido">Lido</option>
+                <option value="lendo">Lendo</option>
+                <option value="ler">Ler</option>
+                <option value="abandonado">Abandonado</option>
+            </select>
+        </div>
+        <div>
+            <label for="readingTime">Dia:</label>
+            <input type="datetime-local" id="readingTime" th:field="*{readingTime}" required />
+        </div>
+        <div>
+            <button type="submit">Adicionar Leitura</button>
+        </div>
+    </form>
+    
+    <button onclick="window.location.href='/readings'">Voltar</button>
+</body>
+</html>

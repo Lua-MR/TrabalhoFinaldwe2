@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Livros</title>
+    <link rel="stylesheet" href="/estilos.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Livros</h2>
+          <button onclick="window.location.href='/add-book'">Novo Livro</button>
+          <button onclick="window.location.href='/start-reading'">Atualizar Leitura</button>
+     <button onclick="window.location.href='/login'" class="delete-btn">Sair</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Livro</th>
+                    <th>Autor</th>
+                    <th>Páginas</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="book : ${books}">
+                    <td th:text="${book.title}"></td>
+                    <td th:text="${book.author}"></td>
+                    <td th:text="${book.pages}"></td>
+                   <td>
+
+                        <button th:onclick="'console.log(\'Book ID: ' + ${book.id} + '\'); window.location.href=\'/book-readings/' + ${book.id} + '\''">Ver Leituras</button>
+                     
+                      <form th:action="@{/edit-book/{id}(id=${book.id})}" method="get">
+                        <button type="submit" class="btn">Edit</button>
+                    </form>
+                 
+					 <form th:action="@{/delete-book/{id}(id=${book.id})}" method="post" style="display:inline;">
+                            <button type="submit" class="delete-btn">Deletar</button>
+                        </form>
+                    </td>
+             
+                </tr>
+            </tbody>
+        </table>
+      </div>
+</body>
+</html>
